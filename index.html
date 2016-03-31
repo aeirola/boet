@@ -11,21 +11,9 @@
         padding: 0;
       }
     </style>
-    <script type="text/javascript" src="//code.jquery.com/jquery-2.2.2.min.js"></script>
-    <script type="text/javascript">
-    var token = null;
-    var secret = 'jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA';
-    $.ajax({
-      type: 'POST',
-      url: 'https://webchat.botframework.com/api/conversations',
-      headers: { 'Authorization': 'BOTCONNECTOR ' + secret }
-    }).done(result => {
-      token = result.token;
-      console.log(token);
-    });
-    </script>
   </head>
   <body>
-    <iframe src='https://webchat.botframework.com/embed/botsong?s=jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA'></iframe>
+    <iframe src="https://webchat.botframework.com/embed/botsong?t=jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA">
+    </iframe>
   </body>
 </html>
