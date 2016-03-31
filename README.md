@@ -1,6 +1,10 @@
 # botsong
 Bot who sings, for you!
 
+Test it out at:
+
+  * Web: https://botsong.herokuapp.com/
+  * Telegram: https://telegram.me/botsong_bot
 
 
 ## Development

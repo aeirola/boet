@@ -41,6 +41,12 @@ bot.add('/', function (session) {
 var server = restify.createServer();
 server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 
+// Serve certain static files
+server.get('/', restify.serveStatic({
+  directory: __dirname,
+  file: 'index.html'
+}));
+
 if (require.main === module) {
   // Start server
   server.listen(yargs.port || 3978, function () {
