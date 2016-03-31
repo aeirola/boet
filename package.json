@@ -1,0 +1,33 @@
+{
+  "name": "botsong",
+  "version": "1.0.0",
+  "description": "Bot who sings, for you!",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aeirola/botsong.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aeirola/botsong/issues"
+  },
+  "homepage": "https://github.com/aeirola/botsong#readme",
+  "dependencies": {
+    "botbuilder": "^0.6.0",
+    "lodash": "^4.7.0",
+    "restify": "^4.0.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.5.3",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-standard": "^1.3.2",
+    "mocha": "^2.4.5"
+  }
+}
