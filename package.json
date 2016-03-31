@@ -20,7 +20,8 @@
   "dependencies": {
     "botbuilder": "^0.6.0",
     "lodash": "^4.7.0",
-    "restify": "^4.0.4"
+    "restify": "^4.0.4",
+    "yargs": "^4.3.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
