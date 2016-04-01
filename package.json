@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/aeirola/botsong#readme",
   "dependencies": {
+    "axios": "^0.9.1",
     "botbuilder": "^0.6.0",
     "lodash": "^4.7.0",
     "restify": "^4.0.4",

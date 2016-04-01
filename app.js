@@ -34,7 +34,10 @@ var bot = new botbuilder.BotConnectorBot({
   appSecret: yargs.secret
 });
 bot.add('/', function (session) {
-  session.send(botsong.onMessage(session));
+
+  botsong.onMessage(session).then(function(response) {
+    session.send(response);
+  });
 });
 
 // Setup Restify Server
