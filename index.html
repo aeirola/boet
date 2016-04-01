@@ -87,22 +87,21 @@
 
       function synthesise(text) {
         var utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = getVoice('Google UK English Male');
+        utterance.voice = getVoice('Google UK English Male') || synt.getVoices()[0];
         utterance.pitch = 0.8;
         utterance.rate = 0.6;
         synth.speak(utterance);
       }
 
-      var recognition;
+      var recognition = new SpeechRecognition();
+      recognition.lang = 'en-GB';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
       var recognitionResult;
       var recognizing = false;
       function startRecognition() {
-        recognition = new SpeechRecognition();
-        recognition.lang = 'en-GB';
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.maxAlternatives = 1;
-
         speechOutputElement.innerHTML = '';
 
         recognition.onresult = function(event) {
