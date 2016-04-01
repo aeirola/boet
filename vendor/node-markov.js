@@ -4,9 +4,9 @@
 */
 
 var EventEmitter = require('events').EventEmitter;
-var deck = require('markov/node_modules/deck');
-var Lazy = require('markov/node_modules/lazy');
-var Hash = require('markov/node_modules/hashish');
+var deck = require('deck');
+var Lazy = require('lazy');
+var Hash = require('hashish');
 
 module.exports = function (order) {
     if (!order) order = 2;
