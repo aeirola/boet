@@ -24,6 +24,12 @@ var yargs = require('yargs')
       describe: 'appSecret',
       type: 'string'
     },
+    'd': {
+      alias: 'data',
+      default: 'data/apollo.json',
+      describe: 'dataset to use',
+      type: 'string'
+    },
     'p': {
       alias: 'port',
       default: 3978,
@@ -36,7 +42,7 @@ var yargs = require('yargs')
   .alias('h', 'help')
   .argv;
 
-var botsong = require('./bot.js');
+var botsong = require('./bot.js')(yargs);
 
 // Create bot and add dialogs
 var bot = new botbuilder.BotConnectorBot({

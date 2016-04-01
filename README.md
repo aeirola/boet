@@ -20,3 +20,19 @@ nodemon app.js
 ```bash
 npm test -- --watch
 ```
+
+
+## Generating data
+
+### Space missions
+
+
+```bash
+# Get data
+git clone https://github.com/Spacelog/Spacelog.git
+
+# Clean data
+cat ~/Downloads/Spacelog/missions/a11/transcripts/TEC ~/Downloads/Spacelog/missions/a11/transcripts/CM | sed -e '/^\[[0-9:]*\]$/d' -e '/^_.*:/d' -e '/^\s*$/d' -e 's/^[^:]*: //' > input/apollo_11.txt
+
+
+```

@@ -25,7 +25,8 @@ var input = fs.readFileSync(yargs.file).toString();
 
 console.log('Preprocessing input');
 input = input.replace(/\s*[.!?]+\s*/gm, ' ');
-input = input.replace(/[\s,:;"\'(){}\[\]]+/gm, ' ');
+input = input.replace(/[\s,:;"(){}\[\]]+/gm, ' ');
+input = input.replace(/(\s'|'\s)/gm, ' ');
 input = input.toLowerCase();
 
 console.log('Generating Markov chain');
