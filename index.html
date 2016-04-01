@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>boet</title>
     <style media="screen">
       html, body {
@@ -42,6 +43,15 @@
 
       #speech-input.active {
         background: #f44;
+      }
+
+      #speech-input, #speech-input span {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
 
       #speech-input.active .prompt {
@@ -149,14 +159,18 @@
         speechInputElement = document.getElementById('speech-input');
         speechOutputElement = document.getElementById('speech-output');
 
-        speechInputElement.addEventListener('mousedown', function() {
-          startRecognition();
-          speechInputElement.className = 'active';
+        ['mousedown', 'touchstart'].forEach(function(eventType) {
+          speechInputElement.addEventListener(eventType, function() {
+            startRecognition();
+            speechInputElement.className = 'active';
+          });
         });
 
-        speechInputElement.addEventListener('mouseup', function() {
-          stopRecognition();
-          speechInputElement.className = '';
+        ['mouseup', 'touchend'].forEach(function(eventType) {
+          speechInputElement.addEventListener(eventType, function() {
+            stopRecognition();
+            speechInputElement.className = '';
+          });
         });
 
         chatFrameElement = document.getElementById('chat-frame');
