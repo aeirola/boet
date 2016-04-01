@@ -10,7 +10,8 @@ var botsong = {
     var response = 'laalaa';
     //return 'You say: ' + session.message.text + ', I say ' + response;
 
-    var wordToRhyme = session.message.text
+    var wordToRhyme = lastWord(session.message.text)
+
     return instance.get('/talk?function=getRhymes&word=' + wordToRhyme)
     .then(function (response) {
 
@@ -40,6 +41,11 @@ var botsong = {
 };
 
 module.exports = botsong;
+
+function lastWord(words) {
+    var n = words.split(" ");
+    return n[n.length - 1];
+}
 
 
 function arrayWithOnlyScoredAbove(scoredArray, allData, score) {
