@@ -97,15 +97,14 @@
         synth.speak(utterance);
       }
 
-      var recognition = new SpeechRecognition();
-      recognition.lang = 'en-GB';
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-
       var recognitionResult;
       var recognizing = false;
       function startRecognition() {
+        var recognition = new SpeechRecognition();
+        recognition.lang = 'en-GB';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
         speechOutputElement.innerHTML = '';
 
         recognition.onresult = function(event) {
