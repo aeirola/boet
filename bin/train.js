@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var markov = require('./vendor/node-markov.js');
+var markov = require('../vendor/node-markov.js');
 var yargs = require('yargs')
   .options({
     'f': {

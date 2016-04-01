@@ -42,7 +42,7 @@ var yargs = require('yargs')
   .alias('h', 'help')
   .argv;
 
-var botsong = require('./bot.js')(yargs);
+var botsong = require('../lib/bot.js')(yargs);
 
 // Create bot and add dialogs
 var bot = new botbuilder.BotConnectorBot({

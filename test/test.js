@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 
 describe('botsong', function() {
-  var botsong = require('./bot.js')({
+  var botsong = require('../lib/bot.js')({
     data: 'data/apollo.json'
   });
 

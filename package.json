@@ -4,8 +4,8 @@
   "description": "Bot who sings, for you!",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test.js",
-    "start": "node app.js"
+    "test": "mocha test",
+    "start": "node bin/app.js"
   },
   "repository": {
     "type": "git",
