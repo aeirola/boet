@@ -41,6 +41,10 @@
         font-family: sans-serif;
       }
 
+      #speech-input.disabled {
+        display: none;
+      }
+
       #speech-input.active {
         background: #f44;
       }
@@ -68,7 +72,7 @@
 
     <script type="text/javascript">
       var synth = window.speechSynthesis;
-      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       var speechInputElement,
           speechOutputElement,
@@ -158,6 +162,8 @@
         speechInputElement = document.getElementById('speech-input');
         speechOutputElement = document.getElementById('speech-output');
 
+        speechInputElement.className = 'enabled';
+
         ['mousedown', 'touchstart'].forEach(function(eventType) {
           speechInputElement.addEventListener(eventType, function() {
             startRecognition();
@@ -205,7 +211,7 @@
   <body>
     <iframe id="chat-frame" src="/embed/botsong?t=jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA">
     </iframe>
-    <div id="speech-input">
+    <div id="speech-input" class="disabled">
         <span class="prompt">Click to speak</span>
         <span id="speech-output" class="output"></span>
     </div>
