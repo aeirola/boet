@@ -21,18 +21,28 @@ nodemon app.js
 npm test -- --watch
 ```
 
+### Running bot in CLI
+
+```bash
+node bin/cli.js --data data/apollo.json
+```
+
 
 ## Generating data
 
-### Space missions
+### Gathering input
 
-
+#### Space missions
 ```bash
 # Get data
 git clone https://github.com/Spacelog/Spacelog.git
 
 # Clean data
 cat ~/Downloads/Spacelog/missions/a11/transcripts/TEC ~/Downloads/Spacelog/missions/a11/transcripts/CM | sed -e '/^\[[0-9:]*\]$/d' -e '/^_.*:/d' -e '/^\s*$/d' -e 's/^[^:]*: //' > input/apollo_11.txt
+```
 
+### Training modeled
 
+```bash
+node bin/train.js -f input/apollo_11.txt -o data/apollo.json
 ```
