@@ -20,12 +20,13 @@
   "dependencies": {
     "axios": "^0.9.1",
     "botbuilder": "^0.6.0",
+    "deck": ">=0.0.3",
+    "hashish": ">=0.0.2",
+    "http-proxy": "^1.13.2",
+    "lazy": ">=1.0.3",
     "lodash": "^4.7.0",
     "restify": "^4.0.4",
-    "yargs": "^4.3.2",
-    "deck": ">=0.0.3",
-    "lazy": ">=1.0.3",
-    "hashish": ">=0.0.2"
+    "yargs": "^4.3.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

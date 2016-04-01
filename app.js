@@ -1,3 +1,13 @@
+var httpProxy = require('http-proxy');
+var proxy = httpProxy.createProxyServer({
+  target: 'https://webchat.botframework.com/',
+  secure: false,
+  prependPath: false,
+  headers: {
+    host: 'webchat.botframework.com'
+  }
+});
+
 var restify = require('restify');
 var botbuilder = require('botbuilder');
 var yargs = require('yargs')
@@ -43,6 +53,17 @@ bot.add('/', function (session) {
 // Setup Restify Server
 var server = restify.createServer();
 server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
+
+// Proxy stuff
+server.get('/embed/botsong', function(req, res) {
+  proxy.web(req, res);
+});
+server.get('/(css|scripts|images|fonts|api)/.*', function(req, res) {
+  proxy.web(req, res);
+});
+server.post('/api/.*', function(req, res) {
+  proxy.web(req, res);
+});
 
 // Serve certain static files
 server.get('/', restify.serveStatic({

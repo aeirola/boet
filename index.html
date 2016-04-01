@@ -4,11 +4,22 @@
     <meta charset="utf-8">
     <title>botsong</title>
     <style media="screen">
-      html, body, iframe {
+      html, body {
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      iframe {
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
         border: none;
         border: none;
         background:
@@ -17,10 +28,159 @@
           linear-gradient(to top, #dbdee1 43px, transparent 63px),
           #fff;
       }
+
+      #speech-input {
+        flex: 0 1 50px;
+        width: 100%;
+        height: 50px;
+        background: #faa;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        font-family: sans-serif;
+      }
+
+      #speech-input.active {
+        background: #f44;
+      }
+
+      #speech-input.active .prompt {
+        display: none;
+      }
+
+      #speech-input .output {
+        display: none;
+      }
+      #speech-input.active .output {
+        display: inline-block;;
+      }
     </style>
+
+    <script type="text/javascript">
+      var synth = window.speechSynthesis;
+      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+      var speechInputElement,
+          speechOutputElement,
+          chatFrameElement,
+          messageInputElement;
+
+      function synthesise(text) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = synth.getVoices()[1];
+        synth.speak(utterance);
+      }
+
+      var recognition;
+      var recognitionResult;
+      var recognizing = false;
+      function startRecognition() {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'en-GB';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+
+        speechOutputElement.innerHTML = '';
+
+        recognition.onresult = function(event) {
+          recognitionResult = event.results[0][0].transcript;
+          console.log('Recognition result:', recognitionResult);
+          speechOutputElement.innerHTML = recognitionResult;
+        }
+
+        recognition.onnomatch = function(event) {
+          console.log('No match', event);
+        }
+
+        recognition.onerror = function(event) {
+          console.log('Error', event);
+        }
+
+        recognition.onspeechstart = function(event) {
+          console.log('Recognition started');
+        }
+
+        recognition.onspeechend = function(event) {
+          console.log('Recognition complete:', recognitionResult);
+          sendMessage(recognitionResult);
+        }
+
+        recognizing = true;
+        recognition.start();
+      }
+
+      function stopRecognition() {
+        recognition.stop();
+        speechOutputElement.innerHTML = '';
+        recognizing = false;
+      }
+
+      function sendMessage(text) {
+        // XXX Hacking into embedded chat app!
+        messageInputElement.textContent = text;
+        var e = new Event('keypress');
+        e.which = 13;
+        e.keyCode = 13;
+        messageInputElement.dispatchEvent(e);
+      }
+
+      function onMessageReceived(receivedText) {
+        synthesise(receivedText);
+      }
+
+      document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+          return
+        }
+
+        speechInputElement = document.getElementById('speech-input');
+        speechOutputElement = document.getElementById('speech-output');
+        chatFrameElement = document.getElementById('chat-frame');
+        messageInputElement = chatFrameElement.contentDocument.getElementById('messageToSend');
+        messageContainerElement = chatFrameElement.contentDocument.getElementById('messages-container');
+
+        // XXX: Hacking into embedded chat app!
+        var newMessageObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            for (var i = 0; i < mutation.addedNodes.length; i++) {
+              var addedNode = mutation.addedNodes[i];
+              if (addedNode.nodeType !== Node.ELEMENT_NODE) {
+                continue;
+              }
+
+              var textElement = addedNode.querySelector('.bot-msg .message-text');
+              if (!textElement) {
+                continue;
+              }
+
+              var text = textElement.textContent.trim();
+              onMessageReceived(text);
+            };
+          });
+        });
+        newMessageObserver.observe(messageContainerElement, {
+          childList: true
+        });
+
+        speechInputElement.addEventListener('mousedown', function() {
+          startRecognition();
+          speechInputElement.className = 'active';
+        });
+
+        speechInputElement.addEventListener('mouseup', function() {
+          stopRecognition();
+          speechInputElement.className = '';
+        });
+      };
+    </script>
   </head>
   <body>
-    <iframe src="https://webchat.botframework.com/embed/botsong?t=jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA">
+    <iframe id="chat-frame" src="/embed/botsong?t=jM-p06EWGqo.cwA.4m8.KB11DFSwUDHW08fkNR2W6kadPgq6CXLPLC98vMZZsSA">
     </iframe>
+    <div id="speech-input">
+        <span class="prompt">Click to speak</span>
+        <span id="speech-output" class="output"></span>
+    </div>
   </body>
 </html>
