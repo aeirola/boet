@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 
-describe('botsong', function() {
-  var botsong = require('../lib/bot.js')({
+describe('boet', function() {
+  var boet = require('../lib/bot.js')({
     data: 'data/apollo.json'
   });
 
@@ -12,7 +12,7 @@ describe('botsong', function() {
       }
     };
 
-    botsong.onMessage(session).then(function(response){
+    boet.onMessage(session).then(function(response){
       expect(response).not.to.equal('Error');
       console.log('>', input);
       console.log('<', response);

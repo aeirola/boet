@@ -1,10 +1,10 @@
-# botsong
-Bot who sings, for you!
+# boet
+Beat droppin' poem bot
 
 Test it out at:
 
-  * Web: https://botsong.herokuapp.com/
-  * Telegram: https://telegram.me/botsong_bot
+  * Web: https://boet.herokuapp.com/
+  * Telegram: https://telegram.me/boet_bot
 
 
 ## Development

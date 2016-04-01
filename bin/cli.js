@@ -14,7 +14,7 @@ var yargs = require('yargs')
   .alias('h', 'help')
   .argv;
 
-var botsong = require('../lib/bot.js')(yargs);
+var boet = require('../lib/bot.js')(yargs);
 
 
 var stdin = process.openStdin();
@@ -25,7 +25,7 @@ stdin.on('data', function (line) {
       text: line.toString()
     }
   };
-  botsong.onMessage(session).then(function(response) {
+  boet.onMessage(session).then(function(response) {
     console.log(response);
     util.print('> ');
   });
