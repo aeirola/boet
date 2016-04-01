@@ -21,9 +21,11 @@ var botsong = {
       scoredArray = arrayWithOnlyScoredAbove(scoredArray, response.data, 250);
       scoredArray = arrayWithOnlyScoredAbove(scoredArray, response.data, 200);
 
+	  var textLenght = session.message.text.length
+
       for (var i = 0 ; i < scoredArray.length; i++ ) {
         var item = scoredArray[i];
-        var responseText = buildResponseText(item.word);
+        var responseText = buildResponseText(item.word, textLenght);
         if (responseText) {
           return responseText;
         }
@@ -54,13 +56,28 @@ function lastWord(words) {
     return n[n.length - 1];
 }
 
-function buildResponseText(word) {
+function buildResponseText(word, length) {
   var key = m.search(word.toLowerCase());
   if (!key) {
     return undefined;
   }
 
   var responseText = m.backward(key, 10).join(' ') + ' ' + word;
+
+  var textArray = responseText.split(" ");
+  var finalText = "";
+
+  var i = textArray.length;
+  while (i > 0 ) {
+  	i = i - 1;
+  	finalText = textArray[i] + " " + finalText
+  	if (finalText.length >= length)
+  	{
+  		break
+  	}
+  }
+
+  responseText = finalText
   responseText = responseText.charAt(0).toUpperCase() + responseText.slice(1);
 
   return responseText;
