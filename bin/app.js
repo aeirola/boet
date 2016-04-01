@@ -1,3 +1,4 @@
+var path = require('path');
 var httpProxy = require('http-proxy');
 var proxy = httpProxy.createProxyServer({
   target: 'https://webchat.botframework.com/',
@@ -73,7 +74,7 @@ server.post('/api/.*', function(req, res) {
 
 // Serve certain static files
 server.get('/', restify.serveStatic({
-  directory: __dirname,
+  directory: path.join(__dirname, '..'),
   file: 'index.html'
 }));
 
