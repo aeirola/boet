@@ -16,15 +16,19 @@ var botsong = {
     return instance.get('/talk?function=getRhymes&word=' + wordToRhyme)
     .then(function (response) {
 
-      var scoredArray = [];
-      scoredArray = arrayWithOnlyScoredAbove(scoredArray, response.data, 300);
-      scoredArray = arrayWithOnlyScoredAbove(scoredArray, response.data, 250);
-      scoredArray = arrayWithOnlyScoredAbove(scoredArray, response.data, 200);
+      var scoredArray = response.data;
+
+      // sorting by score
+	  scoredArray.sort(function(a, b) {
+    	return (Math.round(Math.random()*10) + 1)
+ * weightScore(b.score) - (Math.round(Math.random()*10) + 1) * weightScore(a.score);
+	  });
 
 	  var textLenght = session.message.text.length
 
       for (var i = 0 ; i < scoredArray.length; i++ ) {
         var item = scoredArray[i];
+        console.log("testing with word " + item.word + " on score " + item.score)
         var responseText = buildResponseText(item.word, textLenght);
         if (responseText) {
           return responseText;
@@ -32,14 +36,6 @@ var botsong = {
       }
 
       return 'I can\'t come up with anything that rhymes with '  + wordToRhyme;
-
-      // if (scoredArray.length > 0) {
-      //   var item = scoredArray[Math.floor(Math.random()*scoredArray.length)];
-      //   return m.respond(item.word).join(' ') + ' ' + item.word;
-      //   // return 'hey that rhymes with ' + item.word;
-      // } else {
-      //   return 'I can\'t come up with anything that rhymes with '  + wordToRhyme;
-      // }
     })
     .catch(function (response) {
       console.log(response);
@@ -48,6 +44,30 @@ var botsong = {
 
   }
 };
+
+function weightScore(score)
+{
+	if (score >= 300)
+	{
+		return score * 10
+	} 
+	else if (score >= 250) 
+	{
+		return score * 5
+	}
+	else if (score >= 200) 
+	{
+		return score * 3
+	}
+	else if (score >= 100) 
+	{
+		return score * 2
+	}
+	else 
+	{
+		return score * 1
+	}
+}
 
 module.exports = botsong;
 
@@ -83,15 +103,3 @@ function buildResponseText(word, length) {
   return responseText;
 }
 
-function arrayWithOnlyScoredAbove(scoredArray, allData, score) {
-  if (scoredArray.length == 0)
-  {
-    for (var i = 0; i < allData.length; i++) {
-      if (allData[i].score >= score)
-      {
-        scoredArray.push(allData[i]);
-      }
-    }
-  }
-  return scoredArray;
-}
