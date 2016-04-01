@@ -101,7 +101,7 @@
           console.log('Recognition started');
         }
 
-        recognition.onspeechend = function(event) {
+        recognition.onend = function(event) {
           console.log('Recognition complete:', recognitionResult);
           sendMessage(recognitionResult);
         }
