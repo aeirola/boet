@@ -11,11 +11,9 @@ describe('botsong', function() {
     };
 
     botsong.onMessage(session).then(function(response){
-      expect(response).not.to.equal('error');
-      console.log(response)
-      done()
+      expect(response).not.to.equal('Error');
+      console.log(response);
+      done();
     });
-
-
   });
 });
