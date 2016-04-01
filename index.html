@@ -91,7 +91,7 @@
 
       function synthesise(text) {
         var utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = getVoice('Google UK English Male') || synt.getVoices()[0];
+        utterance.voice = getVoice('Google UK English Male') || synth.getVoices()[0];
         utterance.pitch = 0.8;
         utterance.rate = 0.6;
         synth.speak(utterance);
