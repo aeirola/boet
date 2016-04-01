@@ -65,9 +65,21 @@
           chatFrameElement,
           messageInputElement;
 
+      function getVoice(name) {
+        var voices = synth.getVoices();
+        for (var i = 0; i < voices.length ; i++) {
+          var voice = voices[i];
+          if (voice.name === name) {
+            return voice;
+          }
+        }
+      }
+
       function synthesise(text) {
         var utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = synth.getVoices()[1];
+        utterance.voice = getVoice('Google UK English Male');
+        utterance.pitch = 0.8;
+        utterance.rate = 0.6;
         synth.speak(utterance);
       }
 
@@ -136,6 +148,17 @@
 
         speechInputElement = document.getElementById('speech-input');
         speechOutputElement = document.getElementById('speech-output');
+
+        speechInputElement.addEventListener('mousedown', function() {
+          startRecognition();
+          speechInputElement.className = 'active';
+        });
+
+        speechInputElement.addEventListener('mouseup', function() {
+          stopRecognition();
+          speechInputElement.className = '';
+        });
+
         chatFrameElement = document.getElementById('chat-frame');
         messageInputElement = chatFrameElement.contentDocument.getElementById('messageToSend');
         messageContainerElement = chatFrameElement.contentDocument.getElementById('messages-container');
@@ -163,15 +186,6 @@
           childList: true
         });
 
-        speechInputElement.addEventListener('mousedown', function() {
-          startRecognition();
-          speechInputElement.className = 'active';
-        });
-
-        speechInputElement.addEventListener('mouseup', function() {
-          stopRecognition();
-          speechInputElement.className = '';
-        });
       };
     </script>
   </head>
