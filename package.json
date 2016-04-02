@@ -26,6 +26,7 @@
     "lazy": ">=1.0.3",
     "lodash": "^4.7.0",
     "restify": "^4.0.4",
+    "sentiment": "^1.0.6",
     "yargs": "^4.3.2"
   },
   "devDependencies": {
