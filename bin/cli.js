@@ -2,10 +2,9 @@
 var util = require('util');
 var yargs = require('yargs')
   .options({
-    'd': {
-      alias: 'data',
-      default: 'data/apollo.json',
-      describe: 'dataset to use',
+    'b': {
+      alias: 'bingKey',
+      describe: 'Bing key for search',
       type: 'string'
     }
   })

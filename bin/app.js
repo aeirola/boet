@@ -16,19 +16,18 @@ var yargs = require('yargs')
     'i': {
       alias: 'id',
       default: 'botsong',
-      describe: 'appId',
+      describe: 'Bot connector appId',
       type: 'string'
     },
     's': {
       alias: 'secret',
       demand: true,
-      describe: 'appSecret',
+      describe: 'Bot connector appSecret',
       type: 'string'
     },
-    'd': {
-      alias: 'data',
-      default: 'data/apollo.json',
-      describe: 'dataset to use',
+    'b': {
+      alias: 'bingKey',
+      describe: 'Bing key for search',
       type: 'string'
     },
     'p': {
