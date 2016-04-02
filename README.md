@@ -7,6 +7,27 @@ Test it out at:
   * Telegram: https://telegram.me/boet_bot
 
 
+## What is it?
+
+ * A chat bot connected to [Microsoft Bot Framework](https://dev.botframework.com/)
+ * A [custom UI](https://boet.herokuapp.com/) with speech input and output
+ * A Markov chain trained with [Apollo 11 mission transcripts](https://github.com/Spacelog/Spacelog)
+
+## What does it do?
+
+ * Listens for messages through the Bot Framework [BotConnector](http://docs.botframework.com/connector/getstarted/)
+ * Finds a rhyming end word from [RhymeBrain API](http://rhymebrain.com/api.html)
+ * Generates a text from the Markov chain, based on matched rhymes
+ * Finds a suitable image from [Bing Image Search API](https://datamarket.azure.com/dataset/bing/search)
+ * Makes you laugh
+
+## Who made it?
+
+ * [Axel Eirola](http://aeirola.iki.fi/)
+ * [Janne Kiirikki](http://futurice.com/people/janne-kiirikki)
+ * @ Futurice CodeCamp 2016
+
+
 ## Development
 
 ### Autoreloading dev server
@@ -47,6 +68,6 @@ cat ~/Downloads/Spacelog/missions/a11/transcripts/TEC ~/Downloads/Spacelog/missi
 node bin/train.js -f input/apollo_11.txt -o data/apollo.json
 ```
 
-### About
+### Disclaimers
 
 This bot uses http://rhymebrain.com/api.html for wicked rhyme dropping.

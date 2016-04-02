@@ -1,17 +1,34 @@
 {
-  "name": "botsong",
+  "name": "boet",
   "version": "1.0.0",
-  "description": "Bot who sings, for you!",
-  "main": "app.js",
+  "description": "Beat droppin' poem bot",
+  "main": "bin/app.js",
   "scripts": {
     "test": "mocha test",
     "start": "node bin/app.js"
   },
+  "keywords": [
+    "bot",
+    "poet",
+    "markov"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aeirola/botsong.git"
   },
-  "author": "",
+  "author": "Axel Eirola <axel.eirola@futurice.com>",
+  "contributors": [
+    "Janne Kiirikki <janne.kiirikki@futurice.com>"
+  ],
+  "bin": {
+    "app": "./bin/app.js",
+    "cli": "./bin/cli.js",
+    "train": "./bin/train.js"
+  },
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aeirola/botsong/issues"

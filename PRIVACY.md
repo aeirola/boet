@@ -1,4 +1,4 @@
 Privacy Statement
 =================
 
-We won't do anything bad to your data, we promise!
+We might log your inputs to the bot. But we won't do anything bad to your data, we promise!
