@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-var util = require('util');
 var yargs = require('yargs')
   .options({
     'b': {
@@ -13,11 +12,13 @@ var yargs = require('yargs')
   .alias('h', 'help')
   .argv;
 
+var logger = require('../lib/logger.js');
 var boet = require('../lib/bot.js')(yargs);
 
+logger.info('Starting commandline interface');
 
 var stdin = process.openStdin();
-util.print('> ');
+process.stdout.write('> ');
 stdin.on('data', function (line) {
   var session = {
     message: {
@@ -25,7 +26,7 @@ stdin.on('data', function (line) {
     }
   };
   boet.onMessage(session).then(function(response) {
-    console.log(response);
-    util.print('> ');
+    process.stdout.write('< ' + response.replace(/\n/g, '\n< '));
+    process.stdout.write('\n\n> ');
   });
 });

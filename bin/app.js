@@ -43,6 +43,8 @@ var yargs = require('yargs')
   .argv;
 
 var boet = require('../lib/bot.js')(yargs);
+var logger = require('../lib/logger.js');
+logger.level = 'verbose';
 
 // Create bot and add dialogs
 var bot = new botbuilder.BotConnectorBot({
@@ -57,7 +59,9 @@ bot.add('/', function (session) {
 });
 
 // Setup Restify Server
-var server = restify.createServer();
+var server = restify.createServer({
+  name: 'bot connector'
+});
 server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 
 // Proxy stuff
@@ -78,9 +82,10 @@ server.get('/', restify.serveStatic({
 }));
 
 if (require.main === module) {
+  logger.info('Starting bot server');
   // Start server
   server.listen(yargs.port || 3978, function () {
-    console.log('%s listening to %s', server.name, server.url);
+    logger.info('%s listening on %s', server.name, server.url);
   });
 }
 

@@ -1,5 +1,5 @@
 var fs = require('fs');
-
+var logger = require('../lib/logger.js');
 var markov = require('../vendor/node-markov.js');
 var yargs = require('yargs')
   .options({
@@ -20,18 +20,18 @@ var yargs = require('yargs')
   .alias('h', 'help')
   .argv;
 
-console.log('Reading file', yargs.file);
+logger.info('Reading file', yargs.file);
 var input = fs.readFileSync(yargs.file).toString();
 
-console.log('Preprocessing input');
+logger.info('Preprocessing input');
 input = input.replace(/\s*[.!?]+\s*/gm, ' ');
 input = input.replace(/[\s,:;"(){}\[\]]+/gm, ' ');
 input = input.replace(/(\s'|'\s)/gm, ' ');
 input = input.toLowerCase();
 
-console.log('Generating Markov chain');
+logger.info('Generating Markov chain');
 var m = markov(1);
 m.seed(input, function () {
-  console.log('Writing output file to', yargs.output);
+  logger.info('Writing output file to', yargs.output);
   fs.writeFileSync(yargs.output, m.writeExternal());
 });

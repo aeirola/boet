@@ -21,12 +21,14 @@
     "axios": "^0.9.1",
     "botbuilder": "^0.6.0",
     "deck": ">=0.0.3",
+    "es6-promise": "^3.1.2",
     "hashish": ">=0.0.2",
     "http-proxy": "^1.13.2",
     "lazy": ">=1.0.3",
     "lodash": "^4.7.0",
     "restify": "^4.0.4",
     "sentiment": "^1.0.6",
+    "winston": "^2.2.0",
     "yargs": "^4.3.2"
   },
   "devDependencies": {
