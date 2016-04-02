@@ -46,3 +46,7 @@ cat ~/Downloads/Spacelog/missions/a11/transcripts/TEC ~/Downloads/Spacelog/missi
 ```bash
 node bin/train.js -f input/apollo_11.txt -o data/apollo.json
 ```
+
+### About
+
+This bot uses http://rhymebrain.com/api.html for wicked rhyme dropping.
